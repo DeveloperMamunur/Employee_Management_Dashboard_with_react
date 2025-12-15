@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "name": "John Doe",
+    "department": "Engineering",
+    "role": "Senior Developer",
+    "joiningDate": "2022-01-15",
+    "status": "Active",
+    "performanceScore": 85,
+    "archived": false
+  },
+  {
+    "id": "2",
+    "name": "Jane Smith",
+    "department": "Marketing",
+    "role": "Marketing Manager",
+    "joiningDate": "2021-06-20",
+    "status": "Active",
+    "performanceScore": 92,
+    "archived": false
+  },
+  {
+    "id": "3",
+    "name": "Bob Johnson",
+    "department": "HR",
+    "role": "HR Specialist",
+    "joiningDate": "2023-03-10",
+    "status": "On Leave",
+    "performanceScore": 78,
+    "archived": false
+  }
+]
