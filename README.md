@@ -1,3 +1,82 @@
+# Employee Management Dashboard
+
+Live demo: https://employee-management-dashboard-with.vercel.app/
+
+A lightweight React + Vite dashboard for viewing and managing employee data. This project demonstrates a small, component-driven UI built with Vite, React, and Ant Design, and includes a sample dataset in `src/data/employees.json`.
+
+## Features
+
+- List and search employees
+- Component-based layout with a data table and drawer details
+- Uses Ant Design for UI components
+
+## Tech stack
+
+- React 19
+- Vite
+- Ant Design
+
+## Project structure (important files)
+
+- `index.html` — app entry HTML
+- `src/main.jsx` — React entry
+- `src/App.jsx` — main app shell
+- `src/components/ContentHeader.jsx` — header / controls
+- `src/components/DataTable.jsx` — employee table and search
+- `src/components/DrawerComponent.jsx` — details drawer
+- `src/data/employees.json` — sample employee data
+
+## Quick start
+
+Prerequisites: Node.js (recommended >= 18) and npm.
+
+1. Install dependencies
+
+```bash
+npm install
+```
+
+2. Run the development server
+
+```bash
+npm run dev
+```
+
+3. Build for production
+
+```bash
+npm run build
+```
+
+4. Preview the production build locally
+
+```bash
+npm run preview
+```
+
+5. Lint the project
+
+```bash
+npm run lint
+```
+
+## Data
+
+The app uses the sample dataset at `src/data/employees.json`. You can modify or replace this file to test with different data shapes.
+
+## Development notes
+
+- UI library: `antd` (Ant Design). Look in `src/components` for component implementations.
+- Routing: this project is a single-page demo — add `react-router` if you need multiple views.
+- State: simple local state is used; consider adding Context or a state library for larger apps.
+
+## Contributing
+
+Contributions and improvements are welcome. Please open issues or pull requests.
+
+## License
+
+This repository does not include a license by default. Add a `LICENSE` file if you intend to make this project open-source.
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
