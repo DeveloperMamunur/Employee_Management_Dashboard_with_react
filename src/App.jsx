@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -10,21 +10,62 @@ import {
 import { Button, Layout, Menu, theme, Breadcrumb, Flex, Spin  } from 'antd';
 import DataTable from './components/DataTable';
 import ContentHeader from './components/ContentHeader';
+import DrawerComponent from './components/DrawerComponent';
+import employeesData from './data/employees.json';
+
 const { Header, Sider, Content } = Layout;
+
 function App() {
   const [collapsed, setCollapsed] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [size, setSize] = useState();
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+  const [open, setOpen] = useState(false);
+  const [editingEmployee, setEditingEmployee] = useState(null);
+  const showDrawer = (employee = null) => {
+    setEditingEmployee(employee);
+    setOpen(true);
+    setSize('large');
+  };
+  const onClose = () => {
+    setOpen(false);
+    setEditingEmployee(null);
+  };
 
-  React.useEffect(() => {
+  const [employees, setEmployees] = useState([])
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('employees');
+    const parsed = stored ? JSON.parse(stored) : [];
+
+    const sourceData =
+      Array.isArray(parsed) && parsed.length > 0
+        ? parsed
+        : employeesData;
+
+    const withIds = sourceData.map((emp, index) => ({
+      ...emp,
+      id: emp.id ?? String(index + 1),
+    }));
+
+    setEmployees(withIds);
+  }, []); 
+
+  useEffect(() => {
+    if (employees.length > 0) {
+      localStorage.setItem('employees', JSON.stringify(employees));
+    }
+  }, [employees]);
 
   if (loading) {
     return (
@@ -107,7 +148,7 @@ function App() {
                 title: 'Home',
               },
               {
-                title: <a href="">user</a>,
+                title: <span>User</span>,
               },
               {
                 title: 'Employee Management',
@@ -123,11 +164,22 @@ function App() {
               borderRadius: borderRadiusLG,
             }}
           >
-            <ContentHeader />
-            <DataTable />
+            <ContentHeader showDrawer={showDrawer} />
+            <DataTable 
+              employees={employees} 
+              setEmployees={setEmployees} 
+              showDrawer={showDrawer} 
+            />
           </Content>
         </Layout>
       </Layout>
+      <DrawerComponent 
+        onClose={onClose} 
+        open={open} 
+        size={size} 
+        setEmployees={setEmployees} 
+        employee={editingEmployee}
+      />
     </>
   )
 }
